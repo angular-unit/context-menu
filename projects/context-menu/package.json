@@ -2,6 +2,7 @@
   "name": "@angular-unit/context-menu",
   "version": "0.0.1",
   "peerDependencies": {
+    "@angular/cdk": "^14.0.0",
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"
   },

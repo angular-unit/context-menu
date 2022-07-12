@@ -1,0 +1,103 @@
+@import './base.scss';
+
+$chevron-right: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg fill="currentColor" height="1.5em" viewBox="0 0 24 24" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M8.59,18.16L14.25,12.5L8.59,6.84L7.89,7.55L12.84,12.5L7.89,17.45L8.59,18.16Z"/></svg>');
+$chevron-width: 25px;
+$chevron-height: 25px;
+$disabled-color: #989b9e;
+$background-color: #f4f8fd;
+$background-hover: darken($background-color, 20%);
+$spacing: 8px;
+$item-height: 24px;
+$item-spacing: 8px;
+$border-radius: 8px;
+
+context-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.au-context-menu {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: $spacing 0;
+  background: $background-color;
+  user-select: none;
+  border-radius: $border-radius;
+
+  &.context-menu-container {
+    display: block;
+  }
+
+  li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    word-wrap: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &.sub-menu::after {
+      content: '';
+      width: $chevron-width;
+      height: $chevron-height;
+      background: $chevron-right;
+      background-repeat: no-repeat;
+    }
+  
+    &:hover:not([disabled]) {
+      background: $background-hover;
+      
+      > context-menu-container > .context-menu-sub-container {
+        display: block;
+        right: 0;
+      }
+    }
+  
+    .au-context-menu__item {
+      text-decoration: none;
+      outline: none;
+      text-align: left;
+      border: 0;
+      margin: 0;
+      background: none;
+      color: inherit;
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      height: $item-height;
+      padding: 0 $item-spacing;
+      cursor: pointer;
+  
+      @supports selector(:focus-visible) {
+        &:focus-visible {
+          background: $background-hover;
+        }
+      }
+  
+      &:hover {
+        background: $background-hover;
+      }
+
+      &[disabled="true"] {
+        pointer-events: none;
+        color: $disabled-color;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+
+  .au-context-menu {
+    left: 100%;
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+  }
+}

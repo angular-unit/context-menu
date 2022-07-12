@@ -8,8 +8,8 @@ import {
   QueryList,
   ViewContainerRef,
 } from '@angular/core';
-import { filter, fromEvent, Subscription, take } from 'rxjs';
-import { ContextMenuContentComponent } from './context-menu-content/context-menu-content.component';
+import { ContextMenuContainerClass } from './context-menu-const';
+import { ContextMenuContainerComponent } from './context-menu-container/context-menu-container.component';
 import { ContextMenuItemDirective } from './context-menu-item/context-menu-item.directive';
 
 @Component({
@@ -19,17 +19,18 @@ import { ContextMenuItemDirective } from './context-menu-item/context-menu-item.
 })
 export class ContextMenuComponent<T> {
   @ContentChildren(ContextMenuItemDirective)
-  contextMenuItemDirectives!: QueryList<ContextMenuItemDirective<T>>;
-
-  sub: Subscription | null = null;
-  overlayRef: OverlayRef | null = null;
+  _contextMenuItemDirectives: QueryList<ContextMenuItemDirective<T>> | null;
+  _overlayRef: OverlayRef | null;
 
   constructor(
     public overlay: Overlay,
     public viewContainerRef: ViewContainerRef
-  ) {}
+  ) {
+    this._contextMenuItemDirectives = null;
+    this._overlayRef = null;
+  }
 
-  createContextMenu(event: MouseEvent) {
+  createContextMenu(event: MouseEvent): void {
     event.preventDefault();
     const x = event.x;
     const y = event.y;
@@ -47,45 +48,31 @@ export class ContextMenuComponent<T> {
         },
       ]);
 
-    this.overlayRef = this.overlay.create({
+    this._overlayRef = this.overlay.create({
       hasBackdrop: true,
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.close(),
+      positionStrategy
     });
 
-    const contextMenuContentRef: ComponentRef<ContextMenuContentComponent<T>> =
-      this.overlayRef.attach(
-        new ComponentPortal<ContextMenuContentComponent<T>>(
-          ContextMenuContentComponent,
+    const contextMenuContentRef: ComponentRef<ContextMenuContainerComponent<T>> =
+      this._overlayRef.attach(
+        new ComponentPortal<ContextMenuContainerComponent<T>>(
+          ContextMenuContainerComponent,
           this.viewContainerRef
         )
       );
 
     const { instance: contextMenuContentComponent } = contextMenuContentRef;
 
-    contextMenuContentComponent.contextMenuItemDirectives = [
-      ...this.contextMenuItemDirectives,
-    ];
+    contextMenuContentComponent.menuClass = ContextMenuContainerClass;
+    contextMenuContentComponent.contextMenuItemDirectives = this._contextMenuItemDirectives;
 
-    this.sub = fromEvent<MouseEvent>(document, 'click')
-      .pipe(
-        filter((event) => {
-          const clickTarget = event.target as HTMLElement;
-          return (
-            !!this.overlayRef &&
-            !this.overlayRef.overlayElement.contains(clickTarget)
-          );
-        }),
-        take(1)
-      )
-      .subscribe(() => this.disposeContextMenu());
+    this._overlayRef.backdropClick().subscribe(() => this.disposeContextMenu());
   }
 
-  disposeContextMenu() {
-    this.sub && this.sub.unsubscribe();
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
+  disposeContextMenu(): void {
+    if (this._overlayRef) {
+      this._overlayRef.dispose();
+      this._overlayRef = null;
     }
   }
 }

@@ -13,7 +13,25 @@
   <ng-template contextMenuItem>
     <div>Add</div>
   </ng-template>
-  <ng-template contextMenuItem>
+  <ng-template contextMenuItem [disabled]="true">
     <div>Remove</div>
+  </ng-template>
+  <ng-template contextMenuItem [visible]="false">
+    <div>Hidden</div>
+  </ng-template>
+  <ng-template contextMenuItem [subMenu]="subContextMenu">
+    <div>Sub Menu</div>
+  </ng-template>
+</context-menu>
+
+<context-menu #subContextMenu>
+  <ng-template contextMenuItem>
+    <div>Add</div>
+  </ng-template>
+  <ng-template contextMenuItem [disabled]="true">
+    <div>Remove</div>
+  </ng-template>
+  <ng-template contextMenuItem [visible]="false">
+    <div>Hidden</div>
   </ng-template>
 </context-menu>

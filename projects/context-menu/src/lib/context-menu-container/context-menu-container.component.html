@@ -1,0 +1,20 @@
+<ul class="au-context-menu" [ngClass]="menuClass">
+  <li *ngFor="let contextMenuItemDirective of _contextMenuItemDirectives"
+    [class.sub-menu]="contextMenuItemDirective._isSubMenu">
+    <button class="au-context-menu__item"
+      type="button"
+      [class.active]="contextMenuItemDirective._active"
+      [class.hidden]="contextMenuItemDirective._hidden"
+      [attr.disabled]="contextMenuItemDirective._disabled">
+      <ng-template
+        [ngTemplateOutlet]="contextMenuItemDirective.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: value }">
+      </ng-template>
+    </button>
+    <context-menu-container
+      *ngIf="contextMenuItemDirective._isSubMenu && contextMenuItemDirective._subMenu"
+      [menuClass]="_contextMenuSubContainerClass"
+      [contextMenuItemDirectives]="contextMenuItemDirective._subMenu._contextMenuItemDirectives">
+    </context-menu-container>
+  </li>
+</ul>

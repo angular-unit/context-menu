@@ -1,9 +1,7 @@
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 
 <section>
-  <div
-    *ngFor="let item of items"
-    (contextmenu)="open($event)">
+  <div *ngFor="let item of items" (contextmenu)="open($event)">
     {{ item.value }}
   </div>
 </section>

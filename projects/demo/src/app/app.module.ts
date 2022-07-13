@@ -1,16 +1,12 @@
-import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ContextMenuModule } from 'projects/context-menu/src/public-api';
-import { AppComponent } from './app.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule, ContextMenuModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, ContextMenuModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

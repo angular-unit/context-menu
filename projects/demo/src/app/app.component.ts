@@ -11,7 +11,8 @@ interface Item {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @ViewChild('contextMenu') contextMenu: ContextMenuComponent<Item> | null = null;
+  @ViewChild('contextMenu') contextMenu: ContextMenuComponent<Item> | null =
+    null;
 
   title = '@angular-unit/context-menu';
   items: Item[] = [

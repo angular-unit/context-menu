@@ -1,13 +1,13 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
   Component,
   ComponentRef,
   ContentChildren,
   QueryList,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ContextMenuContainerClass } from './context-menu-const';
 import { ContextMenuContainerComponent } from './context-menu-container/context-menu-container.component';
 import { ContextMenuItemDirective } from './context-menu-item/context-menu-item.directive';
@@ -23,8 +23,8 @@ export class ContextMenuComponent<T> {
   _overlayRef: OverlayRef | null;
 
   constructor(
-    public overlay: Overlay,
-    public viewContainerRef: ViewContainerRef
+    private readonly overlay: Overlay,
+    private readonly viewContainerRef: ViewContainerRef
   ) {
     this._contextMenuItemDirectives = null;
     this._overlayRef = null;
@@ -44,8 +44,8 @@ export class ContextMenuComponent<T> {
           originX: 'end',
           originY: 'bottom',
           overlayX: 'end',
-          overlayY: 'top',
-        },
+          overlayY: 'top'
+        }
       ]);
 
     this._overlayRef = this.overlay.create({
@@ -53,18 +53,20 @@ export class ContextMenuComponent<T> {
       positionStrategy
     });
 
-    const contextMenuContentRef: ComponentRef<ContextMenuContainerComponent<T>> =
-      this._overlayRef.attach(
-        new ComponentPortal<ContextMenuContainerComponent<T>>(
-          ContextMenuContainerComponent,
-          this.viewContainerRef
-        )
-      );
+    const contextMenuContentRef: ComponentRef<
+      ContextMenuContainerComponent<T>
+    > = this._overlayRef.attach(
+      new ComponentPortal<ContextMenuContainerComponent<T>>(
+        ContextMenuContainerComponent,
+        this.viewContainerRef
+      )
+    );
 
     const { instance: contextMenuContentComponent } = contextMenuContentRef;
 
     contextMenuContentComponent.menuClass = ContextMenuContainerClass;
-    contextMenuContentComponent.contextMenuItemDirectives = this._contextMenuItemDirectives;
+    contextMenuContentComponent.contextMenuItemDirectives =
+      this._contextMenuItemDirectives;
 
     this._overlayRef.backdropClick().subscribe(() => this.disposeContextMenu());
   }

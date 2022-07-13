@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, QueryList } from '@angular/core';
-import { ContextMenuSubContainerClass } from '../context-menu-const';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  QueryList
+} from '@angular/core';
 import { ContextMenuItemDirective } from '../context-menu-item/context-menu-item.directive';
-import { ContextMenuComponent } from '../context-menu.component';
+import { ContextMenuSubContainerClass } from '../context-menu-const';
 
 @Component({
   selector: 'context-menu-container',
@@ -13,10 +17,10 @@ export class ContextMenuContainerComponent<T> {
   _contextMenuItemDirectives: ContextMenuItemDirective<T>[];
 
   @Input()
-  set contextMenuItemDirectives(value: QueryList<ContextMenuItemDirective<T>> | null) {
-    this._contextMenuItemDirectives = value !== null
-      ? [ ...value ]
-      : [];
+  set contextMenuItemDirectives(
+    value: QueryList<ContextMenuItemDirective<T>> | null
+  ) {
+    this._contextMenuItemDirectives = value !== null ? [...value] : [];
   }
 
   @Input()

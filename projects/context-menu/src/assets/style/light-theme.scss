@@ -46,16 +46,16 @@ context-menu-container {
       background: $chevron-right;
       background-repeat: no-repeat;
     }
-  
+
     &:hover:not([disabled]) {
       background: $background-hover;
-      
+
       > context-menu-container > .context-menu-sub-container {
         display: block;
         right: 0;
       }
     }
-  
+
     .au-context-menu__item {
       text-decoration: none;
       outline: none;
@@ -72,18 +72,18 @@ context-menu-container {
       height: $item-height;
       padding: 0 $item-spacing;
       cursor: pointer;
-  
+
       @supports selector(:focus-visible) {
         &:focus-visible {
           background: $background-hover;
         }
       }
-  
+
       &:hover {
         background: $background-hover;
       }
 
-      &[disabled="true"] {
+      &[disabled='true'] {
         pointer-events: none;
         color: $disabled-color;
       }

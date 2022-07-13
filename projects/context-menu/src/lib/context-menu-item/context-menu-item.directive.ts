@@ -1,6 +1,6 @@
-import { Highlightable } from '@angular/cdk/a11y';
 import { Directive, Input, TemplateRef } from '@angular/core';
 import { ContextMenuComponent } from '../context-menu.component';
+import { Highlightable } from '@angular/cdk/a11y';
 
 @Directive({
   selector: '[contextMenuItem]'

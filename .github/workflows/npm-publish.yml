@@ -12,6 +12,6 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run build
-      - run: npm publish ./dist/angular-unit/context-menu/
+      - run: npm publish ./dist/angular-unit/context-menu/ --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

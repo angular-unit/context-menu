@@ -1,6 +1,6 @@
 {
   "name": "@angular-unit/context-menu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": {
     "./light-theme": {
       "sass": "./src/assets/style/light-theme.scss"

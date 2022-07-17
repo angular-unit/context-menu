@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build @angular-unit/context-menu",
     "watch": "ng build @angular-unit/context-menu --watch",
     "test": "ng test",
     "lint": "npx eslint projects/**/*.{ts,html} --quiet --fix",

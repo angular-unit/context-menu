@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextMenuComponent } from './context-menu.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent<any>;
@@ -7,6 +8,7 @@ describe('ContextMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [OverlayModule],
       declarations: [ContextMenuComponent]
     }).compileComponents();
 

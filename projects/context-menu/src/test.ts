@@ -28,3 +28,7 @@ getTestBed().initTestEnvironment(
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().forEach(context);
+
+export function mock(c: any): any {
+  return jasmine.createSpyObj(Object.getOwnPropertyNames(c.prototype));
+}

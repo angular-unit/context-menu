@@ -1,6 +1,11 @@
 {
   "name": "@angular-unit/context-menu",
   "version": "0.0.1",
+  "exports": {
+    "./light-theme": {
+      "sass": "./src/assets/style/light-theme.scss"
+    }
+  },
   "peerDependencies": {
     "@angular/cdk": "^14.0.0",
     "@angular/common": "^14.0.0",
